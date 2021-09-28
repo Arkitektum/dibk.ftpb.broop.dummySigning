@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DummySinging</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            color: #333435;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .box {
+            line-height: 1.6;
+            position: relative;
+            padding: 24px 28px;
+            margin: 20px 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.18);
+            width: 340px;
+        }
+
+        .button-row {
+            display: flex;
+        }
+
+        .button-row button {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const handleSignClick = () => {
+            alert('Signert')
+        }
+    </script>
+    <div class="box">
+        Signering av PDF
+        <div class="button-row">
+            <button>Avbryt</button>
+            <button>Error</button>
+            <button onclick="handleSignClick()">Signer</button>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
