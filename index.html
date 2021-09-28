@@ -26,7 +26,7 @@
             width: 100%;
             background: white;
             box-shadow: 0 2px 3px rgba(0, 0, 0, 0.18);
-            width: 420px;
+            width: 480px;
         }
 
         .button-row {
@@ -73,48 +73,28 @@
 
 <body>
     <script>
-        const urlParams = new URLSearchParams(queryString);
-        const submissionId = urlParams.get('skjema')
-
-        const handleCancelClick = () => {
-            alert('Avbryt')
+        const handleButtonClick = (redirectPath) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const submissionId = urlParams.get('skjema');
+            const isLocalhost = document.getElementById('isLocalhost').checked;
+            const redirectDomain = isLocalhost ? 'http://localhost:3000' : 'https://dibk-ftpb-broop-frontend.azurewebsites.net';
+            const redirectUrl = `${redirectDomain}/skjema/${submissionId}/${redirectPath}`;
+            window.location.href = redirectUrl;
         }
-        const handleErrorClick = () => {
-            alert('Feil')
-        }
-        const handleSignClick = () => {
-            alert('Signer')
-        }
-
-        const post = (guid, action) => {
-            const apiUrl = ''
-            const fetchOptions = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(
-                    {
-                        guid,
-                        action
-                    }
-                )
-            };
-            return fetch(apiUrl, fetchOptions).then(res => res.json()).then(response => {
-                return reponse;
-            });
-        }
-
-
     </script>
+
     <div class="box">
         <p>Signering av PDF</p>
         <span class="document-icon">📄</span>
         <div class="button-row">
-            <button onclick="handleCancelClick()">Avbryt<i>🙅</i></button>
-            <button onclick="handleErrorClick()">Feil<i>🤷</i></button>
-            <button onclick="handleSignClick()">Signer<i>🕺</i></button>
+            <button onclick="handleButtonClick('signatur-avvist')">Avbryt<i>🙅</i></button>
+            <button onclick="handleButtonClick('signatur-error')">Feil<i>🤷</i></button>
+            <button onclick="handleButtonClick('signert')">Signer<i>🕺</i></button>
         </div>
+        <label for="isLocalhost">
+            <input id="isLocalhost" type="checkbox" />
+            Localhost
+        </label>
     </div>
 
 
