@@ -15,6 +15,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
 
         .box {
@@ -33,22 +34,46 @@
         }
 
         .button-row button {
+            transition: background-color .25s cubic-bezier(.4,0,.2,1) 0ms;
             flex: 1;
+            margin: 4px;
+            background-color: #e0e0e0;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            padding: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button-row button:first-child {
+            margin-left: 0;
+        }
+        .button-row button:last-child {
+            margin-right: 0;
+        }
+        .button-row button:hover {
+            background-color: #eaeaea;
+            border: 1px solid #c0c0c0;
         }
     </style>
 </head>
 
 <body>
     <script>
+        const handleCancelClick = () => {
+            alert('Avbryt')
+        }
+        const handleErrorClick = () => {
+            alert('Feil')
+        }
         const handleSignClick = () => {
-            alert('Signert')
+            alert('Signer')
         }
     </script>
     <div class="box">
-        Signering av PDF
+        <p>Signering av PDF</p>
         <div class="button-row">
-            <button>Avbryt</button>
-            <button>Error</button>
+            <button onclick="handleCancelClick()">Avbryt</button>
+            <button onclick="handleErrorClick()">Feil</button>
             <button onclick="handleSignClick()">Signer</button>
         </div>
     </div>
