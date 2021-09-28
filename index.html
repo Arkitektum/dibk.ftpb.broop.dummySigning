@@ -15,18 +15,18 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            margin: 0;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
 
         .box {
-            line-height: 1.6;
             position: relative;
             padding: 24px 28px;
             margin: 20px 0;
             width: 100%;
             background: white;
             box-shadow: 0 2px 3px rgba(0, 0, 0, 0.18);
-            width: 340px;
+            width: 420px;
         }
 
         .button-row {
@@ -34,31 +34,48 @@
         }
 
         .button-row button {
-            transition: background-color .25s cubic-bezier(.4,0,.2,1) 0ms;
+            transition: background-color .25s cubic-bezier(.4, 0, .2, 1) 0ms;
             flex: 1;
             margin: 4px;
             background-color: #e0e0e0;
             border: 1px solid #c0c0c0;
             border-radius: 4px;
-            padding: 4px;
+            padding: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
         }
+
         .button-row button:first-child {
             margin-left: 0;
         }
+
         .button-row button:last-child {
             margin-right: 0;
         }
+
         .button-row button:hover {
             background-color: #eaeaea;
             border: 1px solid #c0c0c0;
+        }
+
+        .button-row button i {
+            font-style: normal;
+            vertical-align: middle;
+            font-size: 50px;
+            margin-left: 6px;
+        }
+
+        .document-icon {
+            font-size: 150px;
         }
     </style>
 </head>
 
 <body>
     <script>
+        const urlParams = new URLSearchParams(queryString);
+        const submissionId = urlParams.get('skjema')
+
         const handleCancelClick = () => {
             alert('Avbryt')
         }
@@ -68,13 +85,35 @@
         const handleSignClick = () => {
             alert('Signer')
         }
+
+        const post = (guid, action) => {
+            const apiUrl = ''
+            const fetchOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(
+                    {
+                        guid,
+                        action
+                    }
+                )
+            };
+            return fetch(apiUrl, fetchOptions).then(res => res.json()).then(response => {
+                return reponse;
+            });
+        }
+
+
     </script>
     <div class="box">
         <p>Signering av PDF</p>
+        <span class="document-icon">📄</span>
         <div class="button-row">
-            <button onclick="handleCancelClick()">Avbryt</button>
-            <button onclick="handleErrorClick()">Feil</button>
-            <button onclick="handleSignClick()">Signer</button>
+            <button onclick="handleCancelClick()">Avbryt<i>🙅</i></button>
+            <button onclick="handleErrorClick()">Feil<i>🤷</i></button>
+            <button onclick="handleSignClick()">Signer<i>🕺</i></button>
         </div>
     </div>
 
