@@ -73,14 +73,28 @@
 
 <body>
     <script>
-        const handleButtonClick = (redirectPath) => {
+        const getRedirectDomain = environment => {
+            switch (environment) {
+                case 'local':
+                    return 'http://localhost:3000';
+                    break;
+                case 'dev':
+                    return 'https://dibk-ftpb-broop-frontend.azurewebsites.net';
+                    break;
+                case 'test':
+                    return 'https://ansako-test.dibk.no/';
+                    break;
+                default:
+                    return 'https://ansako-test.dibk.no/';
+                    break;
+            }
+        };
+        const handleButtonClick = redirectPath => {
             const urlParams = new URLSearchParams(window.location.search);
-            const submissionId = urlParams.get('skjema');
-            const isLocalhost = urlParams.get('origin') === 'localhost';
-            const redirectDomain = isLocalhost ? 'http://localhost:3000' : 'https://dibk-ftpb-broop-frontend.azurewebsites.net';
-            const redirectUrl = `${redirectDomain}/skjema/${submissionId}/${redirectPath}`;
+            const redirectDomain = getRedirectDomain(urlParams.get('environment'));
+            const redirectUrl = `${redirectDomain}/skjema/${urlParams.get('skjema')}/${redirectPath}`;
             window.location.href = redirectUrl;
-        }
+        };
     </script>
 
     <div class="box">
